@@ -128,7 +128,7 @@ const Feature = ({ title, text, icon }) => {
         rounded={'full'}
         bg={'gray.100'}
         mb={1}
-        mx={'11rem'}>
+        mx={{ base: '8rem', md: '11rem', lg: '11rem' }}>
         {icon}
       </Flex>
       <Center>

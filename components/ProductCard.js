@@ -39,7 +39,6 @@ export default function ProductCard({product }) {
 
 	}, [])
 	const toast = useToast()
-	console.log(product)
 	const { id, name, inventory, image, permalink,price, variant_groups, variants, lookup } = product
 	return (
 	  <Stack

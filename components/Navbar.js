@@ -27,12 +27,9 @@ import {
 
 } from '@chakra-ui/icons';
 import { useRef } from 'react';
-import { changeItemQuantity, removeFromCart, selectCart } from '../lib/redux'
-import { MdOutlineShoppingCart } from 'react-icons/md'
 import { selectNumCartItems, selectCategories, } from '../lib/redux'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Cart from './Cart'
-
 
 export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure();
@@ -42,6 +39,7 @@ export default function WithSubnavigation() {
     const { colorMode, toggleColorMode } = useColorMode()
 
     const numCartItems = useSelector(selectNumCartItems)
+
 
     const {
         isOpen: isOpenReportModal,
@@ -106,8 +104,8 @@ export default function WithSubnavigation() {
                         </Button>
 
 
-                        {colorMode === 'light' ? <IconButton aria-label='Search database' onClick={toggleColorMode} icon={<MoonIcon />} />
-                            : <IconButton aria-label='Search database' onClick={toggleColorMode} icon={<SunIcon />} />
+                        {colorMode === 'light' ? <IconButton aria-label='Change Dark' onClick={toggleColorMode} icon={<MoonIcon />} />
+                            : <IconButton aria-label='Change Light' onClick={toggleColorMode} icon={<SunIcon />} />
                         }
                         
 
@@ -165,6 +163,7 @@ const DesktopNav = () => {
     const linkColor = useColorModeValue('gray.600', 'gray.200');
     const linkHoverColor = useColorModeValue('gray.800', 'white');
     const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+	const categories = useSelector(selectCategories)
 
     return (
         <Stack direction={'row'} spacing={4}>

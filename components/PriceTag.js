@@ -6,7 +6,7 @@ import * as React from 'react'
 export const PriceTag = (props) => {
   const { price, currency, salePrice, rootProps, priceProps,  } = props
   return (
-    <HStack spacing="1" {...rootProps}>
+    <HStack spacing="1">
       <Price textProps={price}>
         
           {price}
@@ -17,7 +17,7 @@ export const PriceTag = (props) => {
 }
 
 const Price = (props) => {
-  const { isOnSale, children, textProps } = props
+  const { isOnSale, children } = props
   const defaultColor = mode('gray.700', 'gray.400')
   const onSaleColor = mode('gray.400', 'gray.700')
   const color = isOnSale ? onSaleColor : defaultColor
@@ -27,13 +27,10 @@ const Price = (props) => {
       fontWeight="medium"
       color={color}
       textDecoration={isOnSale ? 'line-through' : 'none'}
-      {...textProps}
+   
     >
       {children}
     </Text>
   )
 }
 
-const SalePrice = (props) => (
-  <Text as="span" fontWeight="semibold" color={mode('gray.800', 'gray.100')} {...props} />
-)

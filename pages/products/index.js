@@ -15,7 +15,8 @@ import {
 	Heading,
 	Text,
 	useColorModeValue,
-	Select
+	Select,
+	useColorMode
 
 } from '@chakra-ui/react';
 import Error from '../../components/404'
@@ -27,17 +28,11 @@ import Error from '../../components/404'
 // Main Component
 
 const ProductPage = ({ products, categories }) => {
-	const router = useRouter()
+
+
 	const [currentCategory, setCurrentCategory] = useState('all')
-	const [product, setProduct] = useState()
-
-	// TODO: determine current category by route instead of SPA
-	// const { asPath } = useRouter()
-	// const current_category = useMemo(() => {
-	// 	console.log('current path:', asPath)
-	// 	const slug = asPath.replace(/^\//, '')
-	// }, [asPath])
-
+	const {colorMode,toggleColorMode} =useColorMode();
+	
 	// this function returns products filtered by category
 	const categoryProducts = useMemo(() => {
 		// if there aren't any products return an empty array, which in the rendering function will turn into 0 product divs
@@ -56,7 +51,12 @@ const ProductPage = ({ products, categories }) => {
 		// console.log('set current category:', e.target.id)
 		setCurrentCategory(e.target.id)
 	}
+
+	
+
 	// memoized mapping from categories to category buttons
+
+
 
 	const categoryButtons = useMemo(
 		() =>
@@ -65,12 +65,12 @@ const ProductPage = ({ products, categories }) => {
 					<Button
 						id={slug}
 						onClick={onCategoryClick}
-						color={useColorModeValue('gray.800', 'white')}
 						rounded={'15px'}
 						size={'sm'}
 						fontWeight={'normal'}
 						px={6}
 						mx={2}
+						key={slug}
 						colorScheme={'gray'}
 						bg={'teal.500'}
 						_hover={{ bg: 'teal.200' }}
@@ -84,17 +84,25 @@ const ProductPage = ({ products, categories }) => {
 		[categories, currentCategory, setCurrentCategory]
 	)
 
+
+
+
+
+
 	// memoized mapping from the filtered "categoryProducts" to product cards
 	const productCards = useMemo(
 		() => categoryProducts.map(product => <ProductCard product={product} key={product.id} />),
 		[categoryProducts, currentCategory]
 	)
 
+
+
+
 	return (
 		<>
 			<div className='flex flex-wrap mt-20' data-aos-id-blocks>
-				<div className='md:w-1/4 hidden md:flex flex-wrap'>
-					<div className='w-full h-[300px] p-4 shadow-md rounded-lg'>
+				<div className='md:w-1/4 hidden h-full md:flex flex-wrap'>
+					<div className='w-full h-[350px] p-4 shadow-md rounded-lg'>
 						<Flex
 							minH={'30vh'}
 							align={'center'}
@@ -140,10 +148,10 @@ const ProductPage = ({ products, categories }) => {
 									<Text fontSize={'lg'} color={'white'}>
 										Price Range
 									</Text>
-									<Select placeholder='Select option'>
-										<option value='option1'>0-50€</option>
-										<option value='option2'>50-100€</option>
-										<option value='option3'>100-200€</option>
+									<Select placeholder='Select option' >
+										<option value='50'>0-50€</option>
+										<option value='100'>50-100€</option>
+										<option value='200'>100-200€</option>
 									</Select>
 
 								</Stack>
@@ -156,12 +164,12 @@ const ProductPage = ({ products, categories }) => {
 
 					<div className='md:flex hidden p-4'>
 
-						<div className='w-full shadow-md rounded-lg'>
+						<div className='w-full rounded-lg'>
 							<Newsletter />
 						</div>
 					</div>
 				</div>
-				<div className='md:w-3/4 w-full flex flex-wrap'>
+				<div className='md:w-3/4 w-full h-full flex flex-wrap'>
 					<div className='w-full flex p-4 h-[15rem]'>
 						<div className='bg-productsbg bg-cover bg-left-top flex relative w-full rounded-lg'>
 							<h1 className='text-3xl font-bold text-white font-sans absolute top-8 left-2'>Products</h1>
@@ -169,7 +177,7 @@ const ProductPage = ({ products, categories }) => {
 					</div>
 
 					<div className='flex w-full px-4 mb-[50px]' data-aos-id-blocks>
-						<div className='md:px-1'>{categoryButtons}</div>
+						<div className={colorMode === "dark" ? "text-white" : "text-white" }>{categoryButtons}</div>
 					</div>
 
 					<div className='relative w-[90%] left-2'>

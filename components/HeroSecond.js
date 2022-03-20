@@ -13,6 +13,7 @@ import {
   IconProps,
   useColorModeValue,
 } from '@chakra-ui/react';
+import Link from 'next/link'
 
 export default function HeroSecond() {
   return (
@@ -57,7 +58,8 @@ export default function HeroSecond() {
           <Stack
             spacing={{ base: 4, sm: 6 }}
             direction={{ base: 'column', sm: 'row' }}>
-            <Button
+              <Link href="/products">
+              <Button
               rounded={'full'}
               color={useColorModeValue('white', 'white')}
               size={'lg'}
@@ -68,6 +70,8 @@ export default function HeroSecond() {
               _hover={{ bg: 'teal.200' }}>
               Shop Now
             </Button>
+              </Link>
+
             <Button
               rounded={'full'}
               size={'lg'}

@@ -1,5 +1,6 @@
 import {
     useColorModeValue,
+    useColorMode
 } from '@chakra-ui/react';
 
 import { React, useRef } from 'react'
@@ -13,7 +14,6 @@ import {
     DrawerCloseButton,
 } from '@chakra-ui/react'
 import { changeItemQuantity, removeFromCart, selectCart } from '../lib/redux'
-import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const Cart = ({ isOpenReportModal, onCloseReportModal }) => {
 	const dispatch = useDispatch()
+    const { colorMode, toggleColorMode } = useColorMode();
 
 	const { subtotal, line_items,id } = useSelector(selectCart)
 
@@ -52,8 +53,7 @@ const Cart = ({ isOpenReportModal, onCloseReportModal }) => {
                     <DrawerCloseButton />
                     <DrawerHeader>Your Shopping Cart</DrawerHeader>
 
-                    <DrawerBody 				color={useColorModeValue('white', 'white')}
->
+                    <DrawerBody>
                         <div className='mt-8'>
                             <div className='flow-root'>
                                 <ul role='list' className='-my-6 divide-y divide-gray-200'>
@@ -69,8 +69,8 @@ const Cart = ({ isOpenReportModal, onCloseReportModal }) => {
 
                                             <div className='ml-4 flex-1 flex flex-col'>
                                                 <div>
-                                                    <div className='flex justify-between text-base font-medium text-gray-900 dark:text-white'>
-                                                        <h3>
+                                                    <div className='flex justify-between text-base font-medium'>
+                                                        <h3 className={colorMode === "dark" ? "text-white" : "text-gray-700" }>
                                                             <a href='#'>{item.name}</a>
                                                         </h3>
                                                         <p className='ml-4 dark:text-gray-200'>{item.line_total.formatted_with_symbol}</p>
@@ -108,8 +108,8 @@ const Cart = ({ isOpenReportModal, onCloseReportModal }) => {
                     <DrawerFooter>
                         <div className='border-t border-gray-200 py-6 px-4 sm:px-6 w-full'>
                             <div className='flex justify-between text-base font-medium text-gray-900'>
-                                <p className='dark:text-white'>Subtotal</p>
-                                <div className='subtotal_value dark:text-white'>{subtotal?.formatted_with_symbol || '---'}</div>
+                                <p className={colorMode === "dark" ? "text-white" : "text-gray-600" }>Subtotal</p>
+                                <div className={colorMode === "dark" ? "text-white" : "text-gray-600" }>{subtotal?.formatted_with_symbol || '---'}</div>
                             </div>
                             <p className='mt-0.5 text-sm text-gray-500'>Shipping and taxes calculated at checkout.</p>
                             <Link href={`/checkout/${id}`} className='mt-6'>

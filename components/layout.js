@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Cart from './Cart'
 import Navbar from './Navbar'
-import { Flex } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import Footer from '../components/Footer'
 
 const Layout = ({ Component, pageProps, props }) => {
@@ -22,6 +22,7 @@ const Layout = ({ Component, pageProps, props }) => {
 			</Head>
 			<Navbar/>
 			<Component {...pageProps} />
+
 			<Footer/>
 		</Flex>
 	)
