@@ -1,0 +1,51 @@
+.category {
+	background-color: rgb(10, 14, 14);
+	border-radius: 10px;
+	border: 1px solid #70696e;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 13px;
+	padding: 8px 20px;
+	text-decoration: none;
+
+	&:hover {
+		background-color: #655f7efd;
+	}
+
+	&.current {
+		pointer-events: none;
+		font-weight: bold;
+		text-decoration: underline;
+		font-size: 40;
+		color: red;
+		background-color: blue;
+	}
+
+
+}
+
+.current_category {
+	pointer-events: none;
+	font-weight: bold;
+	text-decoration: underline;
+	font-size: 40;
+	color: white;
+	background-color: #655f7efd;
+}
+
+
+// Small tablets and large smartphones (landscape view)
+$screen-sm-min: 576px;
+
+// Small tablets (portrait view)
+$screen-md-min: 768px;
+
+// Tablets and small desktops
+$screen-lg-min: 992px;
+
+// Large tablets and desktops
+$screen-xl-min: 1200px;
+
+
