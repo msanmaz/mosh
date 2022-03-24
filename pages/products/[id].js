@@ -24,7 +24,6 @@ import Gallery from '../../components/Gallery';
 import { addToCart } from '../../lib/redux'
 import { useDispatch } from 'react-redux';
 import WhatsIncluded from '../../components/Whats-included';
-import Head from 'next/head';
 
 
 
@@ -33,8 +32,10 @@ const Test = ({ product }) => {
 	const dispatch = useDispatch()
 	const toast = useToast()
 
+
+
 	const [quantity, setQuantity] = useState(0)
-	const [variantId, setVariantId] = useState('')
+	const [variantId, setVariantId] = useState(null)
 
 	const handleVariant = e => {
 		e.preventDefault();
@@ -173,9 +174,13 @@ const Test = ({ product }) => {
 							<Stack w={'50%'} px={10}>
 								<Text>Sizes:</Text>
 								<Flex>
-									{product.variant_groups[0].options?.map((variant) =>
+									{product.variant_groups.length === 0 ? <div>No Sizes</div> : product.variant_groups[0].options?.map((variant) =>
 										<Button onClick={handleVariant} id={variant.id} mx={2} >{variant.name}</Button>
-									)}
+									)
+									
+								
+								}
+									
 
 								</Flex>
 
@@ -275,7 +280,7 @@ export const getStaticProps = wrapper.getStaticProps(store => async ({ params })
 	const product = products.find(p => p.id === id)
 
 	return {
-		props: { ...props, product, title: product.name },
+		props: { ...props, product, title: product.name }
 	}
 })
 
