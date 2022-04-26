@@ -1,30 +1,26 @@
 import { addToCart } from '../lib/redux'
 import { useDispatch } from 'react-redux'
 import { useCallback } from 'react'
-import { FiShoppingCart } from 'react-icons/fi';
 import { useToast } from '@chakra-ui/react'
 import {
 	AspectRatio,
 	Box,
 	Button,
-	HStack,
 	Image,
-	Link,
 	Skeleton,
 	Stack,
 	Text,
 	useBreakpointValue,
 	useColorModeValue,
   } from '@chakra-ui/react'
-  import * as React from 'react'
-  import { Rating } from './Rating'
   import { FavouriteButton } from './FavouriteButton'
   import { PriceTag } from './PriceTag'
+  import Link from 'next/link'
   
 
 
 
-export default function ProductCard({product }) {
+export default function ProductCard({product}) {
 	const dispatch = useDispatch()
 	const onAddToCart = useCallback(() => {
 		dispatch(addToCart(product.id, 1))
@@ -39,7 +35,7 @@ export default function ProductCard({product }) {
 
 	}, [])
 	const toast = useToast()
-	const { id, name, inventory, image, permalink,price, variant_groups, variants, lookup } = product
+	const { id, name, image } = product
 	return (
 	  <Stack
 		spacing={useBreakpointValue({
@@ -47,8 +43,8 @@ export default function ProductCard({product }) {
 		  md: '5',
 		})}
 	  >
-		<Box position="relative" bgColor={'white'} rounded={'10px'}>
-		  <AspectRatio ratio={4 / 3}>
+		<Box position="relative" bgColor={useColorModeValue('gray.50','gray.100')} rounded={'10px'}>
+		  <AspectRatio ratio={4 / 5}>
 			<Image
 			  src={image.url}
 			  alt={name}
@@ -69,29 +65,24 @@ export default function ProductCard({product }) {
 		</Box>
 		<Stack>
 		  <Stack spacing="1">
-			<Text fontWeight="medium" color={useColorModeValue('gray.700', 'gray.400')}>
+		  <PriceTag price={product.price.formatted_with_symbol} currency="EUR" />
+
+			<Text fontWeight="large" color={useColorModeValue('gray.900', 'gray.200')}>
 			  {name.substring(0,15)}
 			</Text>
-			<PriceTag price={product.price.formatted_with_symbol} currency="EUR" />
 		  </Stack>
-		  <HStack>
-			<Rating defaultValue={Rating} size="sm" />
-			<Text fontSize="sm" color={useColorModeValue('gray.600', 'gray.400')}>
-			  12 Reviews
-			</Text>
-		  </HStack>
 		</Stack>
 		<Stack align="center">
-		  <Button colorScheme="blue" isFullWidth onClick={onAddToCart}>
-			Add to cart
+		<Link href={`/products/${id}`}>
+		  <Button bgColor={useColorModeValue('gray.200', 'gray.700')} 		_hover={{ bg:useColorModeValue('gray.300', 'gray.600')}} isFullWidth>
+			View Details
 		  </Button>
-		  <Link
-			textDecoration="underline"
-			fontWeight="medium"
-			color={useColorModeValue('gray.600', 'gray.400')}
-		  >
-			Quick shop
 		  </Link>
+		  {/* <Link
+			href={`/products/${id}`}
+		  >
+			View Details
+		  </Link> */}
 		</Stack>
 	  </Stack>
 	)

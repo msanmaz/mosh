@@ -50,10 +50,10 @@ export default function WithSubnavigation() {
 
     return (
         <>
-            <Box position="fixed" zIndex={100} w="full">
+            <Stack position="fixed" top='0px' zIndex={100} w="full">
                 <Flex
-                    bg={useColorModeValue('white', 'gray.800')}
-                    color={useColorModeValue('gray.600', 'white')}
+                    bg={useColorModeValue('white', '#161616')}
+                    color={useColorModeValue('gray.900', 'white')}
                     minH={'60px'}
                     py={{ base: 2 }}
                     px={{ base: 4 }}
@@ -62,7 +62,6 @@ export default function WithSubnavigation() {
                     borderColor={useColorModeValue('gray.200', 'gray.900')}
                     align={'center'}>
                     <Flex
-                        flex={{ base: 1, md: 'auto' }}
                         ml={{ base: -2 }}
                         display={{ base: 'flex', md: 'none' }}>
                         <IconButton
@@ -74,7 +73,8 @@ export default function WithSubnavigation() {
                             aria-label={'Toggle Navigation'}
                         />
                     </Flex>
-                    <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+                    <Flex flex={{ base: 1 }} justify={{ base: 'start', md: 'start' }}>
+
                         <Text
                             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
                             fontFamily={'heading'}
@@ -93,7 +93,7 @@ export default function WithSubnavigation() {
                         spacing={4}>
 
 
-                        <Button
+                        {/* <Button
 
                             as={'a'}
                             fontSize={'sm'}
@@ -101,12 +101,12 @@ export default function WithSubnavigation() {
                             variant={'link'}
                             href={'#'}>
                             Sign In
-                        </Button>
+                        </Button> */}
 
-
-                        {colorMode === 'light' ? <IconButton aria-label='Change Dark' onClick={toggleColorMode} icon={<MoonIcon />} />
-                            : <IconButton aria-label='Change Light' onClick={toggleColorMode} icon={<SunIcon />} />
+                        {colorMode === 'light' ? <IconButton aria-label='Change Dark' bgColor={'transparent'} onClick={toggleColorMode} icon={<MoonIcon />} />
+                            : <IconButton aria-label='Change Light' bgColor={'transparent'} onClick={toggleColorMode} icon={<SunIcon />} />
                         }
+      
                         
 
                         <IconButton  ref={btnRef} onClick={onOpenReportModal}>
@@ -149,7 +149,7 @@ export default function WithSubnavigation() {
                 <Collapse in={isOpen} animateOpacity>
                     <MobileNav />
                 </Collapse>
-            </Box>
+            </Stack>
 
                             <Cart isOpenReportModal={isOpenReportModal} onCloseReportModal={onCloseReportModal}/>   
 
@@ -246,6 +246,7 @@ const MobileNav = () => {
         <Stack
             bg={useColorModeValue('white', 'gray.800')}
             p={4}
+            my={-2}
             display={{ md: 'none' }}>
             {NAV_ITEMS.map((navItem) => (
                 <MobileNavItem key={navItem.label} {...navItem} />

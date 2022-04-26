@@ -8,6 +8,10 @@
 const path = require('path')
 
 module.exports = {
+	env: {
+		CUSTOMKEY: process.env.NEXT_PUBLIC_COMMERCE_LIVE,
+		STRIPELIVE:process.env.STRIPE_LIVE
+	  },
 
 	reactStrictMode: false,
 	sassOptions: {

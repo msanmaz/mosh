@@ -71,8 +71,9 @@ import {
   export default function LargeWithNewsletter() {
     return (
       <Box
-        bg={useColorModeValue('gray.50', 'gray.900')}
-        color={useColorModeValue('gray.700', 'gray.200')}>
+        bg={useColorModeValue('gray.50', '#161616')}
+        color={useColorModeValue('gray.700', 'gray.200')}
+        w={'100%'}>
         <Container as={Stack} maxW={'full'} py={10}>
           <SimpleGrid
             templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }}
@@ -82,7 +83,7 @@ import {
                 <Logo color={useColorModeValue('gray.700', 'white')} />
               </Box>
               <Text fontSize={'sm'}>
-                © 2020 Chakra Templates. All rights reserved
+                © 2022 Mosh. All rights reserved
               </Text>
               <Stack direction={'row'} spacing={6}>
                 <SocialButton label={'Twitter'} href={'#'}>

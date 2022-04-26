@@ -18,7 +18,7 @@ export const PriceTag = (props) => {
 
 const Price = (props) => {
   const { isOnSale, children } = props
-  const defaultColor = mode('gray.700', 'gray.400')
+  const defaultColor = mode('gray.700', 'gray.200')
   const onSaleColor = mode('gray.400', 'gray.700')
   const color = isOnSale ? onSaleColor : defaultColor
   return (
