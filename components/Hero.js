@@ -8,29 +8,44 @@ SwiperCore.use([Autoplay,EffectFade])
 
 function Hero() {
     let count = 0
+    let slideInterval;
     const slideRef = React.useRef()
     const images = ['https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1174&q=80','https://images.prismic.io/everpress/6056d88d-01de-447c-9865-dfee9db268a2_ARTISTS+TO+WATCH_+POLLY+BROWN_+EVPERESS_+HOMEPAGE_2.jpg?auto=compress,format&rect=0,515,1779,1067&w=2000&h=1200']
     const [currentIndex,setCurrentIndex] = React.useState(0)
+
+    const removeAnimation = () => {
+        slideRef.current.classList.remove('_1GHbd')
+    }
+ 
     
     React.useEffect(() => {
-        startSlider()
+        slideRef.current.addEventListener('animationed', removeAnimation)
+        slideRef.current.addEventListener('mouseenter', pauseSlider)
+        slideRef.current.addEventListener('mouseleave', startSlider)
+
+        startSlider();
+        return () => {
+            pauseSlider()
+        }
     },[])
 
     const startSlider = () => {
-        setInterval(() => {
+       slideInterval = setInterval(() => {
             nextClick()
             console.log(count)
         }, 7000);
     }
 
+    const pauseSlider = () => {
+        clearInterval(slideInterval)
+    }
+
     const nextClick = () => {
         count = (count +1) % images.length
         setCurrentIndex(count)
-        if(!slideRef.current.classList === null){
-            console.log('noref')
-        }
         slideRef.current.classList.add('_1GHbd')
     }
+
  
    
 
