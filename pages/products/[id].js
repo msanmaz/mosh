@@ -55,8 +55,8 @@ const Test = ({ product }) => {
 
 	const selectOption = useMemo(
 		() => {
-			product.variant_groups.length === 0 ? <option>No Sizes</option> : product.variant_groups[0].options?.map((variant) =>
-				<option id={variant.id} mx={2}>{variant.name}</option>
+			product.variant_groups.length === 0 ? <option>No Sizes</option> : product.variant_groups[0].options?.map((variant,index) =>
+				<option id={variant.id} key={index} mx={2}>{variant.name}</option>
 			)
 		},
 		[]
@@ -143,8 +143,8 @@ const Test = ({ product }) => {
 											}); onCategoryClick(e)
 										}} bgColor={useColorModeValue('white', 'white')} size='lg'>
 											{
-												product.variant_groups.length === 0 ? <option>No Sizes</option> : product.variant_groups[0].options?.map((variant) =>
-													<option id={variant.id} mx={2}>{variant.name}</option>
+												product.variant_groups.length === 0 ? <option>No Sizes</option> : product.variant_groups[0].options?.map((variant,index) =>
+													<option id={variant.id} key={index} mx={2}>{variant.name}</option>
 												)
 											},
 										</Select>
