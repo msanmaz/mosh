@@ -1,21 +1,20 @@
 import React from 'react'
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore,{ Autoplay, EffectFade } from "swiper";
-import "swiper/css";
+import { useRouter } from 'next/router';
+import { route } from 'next/dist/server/router';
 
-
-SwiperCore.use([Autoplay,EffectFade])
 
 function Hero() {
+    const router = useRouter()
     let count = 0
     let slideInterval;
     const slideRef = React.useRef()
-    const images = ['https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1174&q=80','https://images.prismic.io/everpress/6056d88d-01de-447c-9865-dfee9db268a2_ARTISTS+TO+WATCH_+POLLY+BROWN_+EVPERESS_+HOMEPAGE_2.jpg?auto=compress,format&rect=0,515,1779,1067&w=2000&h=1200']
+    const images = ['https://images.prismic.io/everpress/2198bc48-7036-491e-ab52-ccb701024693_homepagecrop2.jpg?auto=compress,format','https://images.prismic.io/everpress/6056d88d-01de-447c-9865-dfee9db268a2_ARTISTS+TO+WATCH_+POLLY+BROWN_+EVPERESS_+HOMEPAGE_2.jpg?auto=compress,format&rect=0,515,1779,1067&w=2000&h=1200']
     const [currentIndex,setCurrentIndex] = React.useState(0)
 
     const removeAnimation = () => {
         slideRef.current.classList.remove('_1GHbd')
     }
+ 
  
     
     React.useEffect(() => {
@@ -24,15 +23,15 @@ function Hero() {
         slideRef.current.addEventListener('mouseleave', startSlider)
 
         startSlider();
+
         return () => {
             pauseSlider()
         }
     },[])
 
     const startSlider = () => {
-       slideInterval = setInterval(() => {
+      slideInterval = setInterval(() => {
             nextClick()
-            console.log(count)
         }, 7000);
     }
 
@@ -57,7 +56,7 @@ function Hero() {
                     <div className='_3Rh31 _3HsKn w-full mx-auto px-2 md:px-5 max-w-[2000px]'>
                         <div className='w-full' style={{ maxWidth: '614px' }}>
                             <div className='py-3'>
-                                <h1 className='heading uppercase text-2xl md:text-xl lg:text-[2rem] md:leading-[1.15] text-white' style={{ fontFamily: 'Roboto , sans-serif' }}>
+                                <h1 className='heading uppercase text-2xl md:text-xl lg:text-[4rem] md:leading-[1.15] text-white' style={{ fontFamily: 'Roboto , sans-serif' }}>
                                     <span>real designs
                                         <br />
                                         by real artists for real people
