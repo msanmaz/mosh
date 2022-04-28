@@ -22,10 +22,12 @@ function Hero() {
         slideRef.current.addEventListener('mouseenter', pauseSlider)
         slideRef.current.addEventListener('mouseleave', startSlider)
 
-        startSlider();
+        slideInterval = setInterval(() => {
+            nextClick()
+        }, 7000);
 
         return () => {
-            pauseSlider()
+            clearInterval(slideInterval)
         }
     },[])
 
